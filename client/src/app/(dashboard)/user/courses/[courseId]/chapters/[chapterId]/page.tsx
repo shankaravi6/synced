@@ -78,7 +78,14 @@ const Course = () => {
             {currentChapter?.video ? (
               <ReactPlayer
                 ref={playerRef}
-                url={currentChapter.video as string}
+                url={
+                  typeof currentChapter?.video === "string"
+                    ? currentChapter.video.replace(
+                        /^undefined/,
+                        "https://sync-s3-buckets.s3.us-east-1.amazonaws.com/"
+                      )
+                    : ""
+                }
                 controls
                 width="100%"
                 height="100%"
